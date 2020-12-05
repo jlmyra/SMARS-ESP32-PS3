@@ -20,10 +20,9 @@ I have included the code in a 'tabbed' format and files (.stl's) for the modifie
 
 ### Software Implementation:
 - Set-up ESP32 in Arduino IDE (for help see: https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-mac-and-linux-instructions/)
-- Install PS3 Library in Arduino IDE https://github.com/jvpernis/esp32-ps3 (for help see: https://techtutorialsx.com/2020/02/16/esp32-connecting-a-ps3-controller/)
-- Install ESP32Servo Library in Arduino IDE https://github.com/jkb-git/ESP32Servo (for help see:https://dronebotworkshop.com/esp32-servo/) - I had to make a small modification to espservo.h . This library uses all of the pwm channels for servos leaving none for motors. You will need to change line 96 of espservo.h to 2 servos max leaving channels 2-16 available for motors
+- Install PS3 Library in Arduino IDE https://github.com/jvpernis/esp32-ps3 (for help see: https://techtutorialsx.com/2020/02/16/esp32-connecting-a-ps3-controller/). Follow the instructions at either link for setting or determining the MAC address of your PS3 controller. 
 - Description: The sketch is presented in a 'tabbed' format for ease of editing. The files are:
-   - ESP32_SMARS_PS3-3-GOLD.ino contains the variables, setup, and loop. 
+   - ESP32_SMARS_PS3-3-GOLD.ino contains the variables, setup, and loop. Enter your PS3 MAC Address on Line 70 in void Setup().
    - Battery_Check.ino is a function that samples the battery voltage and reports it on pin 32. It is commented out in the main Loop and does not need to be used.
    - Connection.ino is a function that looks for the bluetooth connection between the ESP32 and the PS3 controller.
    - onEvent.ino is a function that listens for changes occuring on the PS3 controller and converts them to motor actions for FORWARD, REVERSE, LEFT-RIGHT turns.
