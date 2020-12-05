@@ -1,4 +1,4 @@
-![pic two](https://github.com/jlmyra/SMARS-ESP32-PS3/blob/main/IMG_9174.jpeg =500X500)
+![pic two](https://github.com/jlmyra/SMARS-ESP32-PS3/blob/main/IMG_9174.jpeg){:height="50%" width="50%"}
 # SMARS-ESP32-PS3
 SMARS bot with ESP32 using PS3 controller
 
