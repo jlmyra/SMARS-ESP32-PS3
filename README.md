@@ -1,3 +1,4 @@
+![pic one](https://github.com/jlmyra/SMARS-ESP32-PS3/blob/main/IMG_9174.jpeg)
 # SMARS-ESP32-PS3
 SMARS bot with ESP32 using PS3 controller
 
