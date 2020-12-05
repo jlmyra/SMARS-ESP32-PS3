@@ -33,7 +33,7 @@ There is also a circuit and code for monitoring the charge state of the battery 
 
 ### Circuit Diagram
 
-![pic one](https://github.com/jlmyra/PS3---JEEP/blob/main/Jeep_Landy.png)
+![pic one](https://github.com/jlmyra/SMARS-ESP32-PS3/blob/SMARS_ESP32_Wiring_Diagram.png)
 
    
 ### Final Thoughts
