@@ -35,6 +35,9 @@ There is also a circuit and code for monitoring the charge state of the battery 
 
 ![pic one](https://github.com/jlmyra/SMARS-ESP32-PS3/blob/main/SMARS_ESP32_Wiring_Diagram.png)
 
+### Wiring
+<img src="https://user-images.githubusercontent.com/19330858/101287278-4f142900-37bd-11eb-98c9-aa06b67d0906.jpeg" width="15%"></img> <img src="https://user-images.githubusercontent.com/19330858/101287284-54717380-37bd-11eb-911c-3e1199b6ab27.jpeg" width="15%"></img> <img src="https://user-images.githubusercontent.com/19330858/101287286-5a675480-37bd-11eb-9305-bae63bd2e4bf.jpeg" width="15%"></img> 
+
 
    
 ### Final Thoughts
