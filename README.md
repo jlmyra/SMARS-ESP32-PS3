@@ -40,12 +40,12 @@ These five files need to be downloaded into a folder for the Arduino IDE to acce
 <img src="https://user-images.githubusercontent.com/19330858/101287278-4f142900-37bd-11eb-98c9-aa06b67d0906.jpeg" width="15%"></img> <img src="https://user-images.githubusercontent.com/19330858/101287284-54717380-37bd-11eb-911c-3e1199b6ab27.jpeg" width="15%"></img> <img src="https://user-images.githubusercontent.com/19330858/101287286-5a675480-37bd-11eb-9305-bae63bd2e4bf.jpeg" width="15%"></img> 
 
  - I used 2.54mm pitch screw terminal blocks for making circuit board connections instead of soldering wires directly to the circuit boards. This makes it easy to fix wiring issues (mistakes!). It also makes it easy to reuse the boards in other applications.
- - I offer suggestions for 2 different BEC's necessary to reduce the battery voltage from ~8V to 5 for the ESP32. The second one in the parts list is much smaller an preferable over the other. Any device that will reduce the battery voltage to 5 can be used.
+ - I offer suggestions for 2 different BEC's necessary to reduce the battery voltage from ~8V to 5V for the ESP32. The second one in the parts list is much smaller an preferable over the other. Any device that will reduce the battery voltage to 5V can be used.
  - The L9110s motor controller was selected as it was cheap and easy to get. Any dual channel controller can be used. The L9110S comes with a 6 pin terminal block on one end. I have had mixed success removing the pins and soldering in 2.54 pitch screw terminals. I now solder the screw terminals to the pins instead. It's functional but not very neat.
 
 ### Chassis
 - I have included .stl's for the modified (elongated) chassis, ESP32/L9110S mounting place and dome. 
 - The elongated chassis is based on a four motor design. With this I use the adjustable wheel modification found here - https://www.thingiverse.com/thing:3164589
-   
+- The printed dome fits better if printed 'right-side-up' with supports. When printed upside down - the flat side on the print bed it will likely have a loose fit.   
 ### Final Thoughts
 I am grateful to Kevin McAleer for sharing the SMARS project with us. Thanks!
