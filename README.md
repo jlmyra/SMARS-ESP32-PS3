@@ -1,4 +1,4 @@
-![pic two](https://github.com/jlmyra/SMARS-ESP32-PS3/blob/main/IMG_9174.jpeg)
+<img src="https://user-images.githubusercontent.com/19330858/101283578-3dc12180-37a9-11eb-8e58-9e6dde370467.jpeg" width="15%"></img> <img src="https://user-images.githubusercontent.com/19330858/101283564-25e99d80-37a9-11eb-8bf8-d0bbc2063118.jpeg" width="15%"></img> <img src="https://user-images.githubusercontent.com/19330858/101283567-2b46e800-37a9-11eb-877a-e92da07ae50b.jpeg" width="15%"></img> 
 # SMARS-ESP32-PS3
 SMARS bot with ESP32 using PS3 controller
 
