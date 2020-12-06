@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/19330858/101283882-461a5c00-37ab-11eb-8002-d988d48a8043.jpeg" width="30%"></img> <img src="https://user-images.githubusercontent.com/19330858/101283896-5c281c80-37ab-11eb-9f04-f05337873b00.jpeg" width="30%"></img> 
+<img src="https://user-images.githubusercontent.com/19330858/101283882-461a5c00-37ab-11eb-8002-d988d48a8043.jpeg" width="35%"></img> <img src="https://user-images.githubusercontent.com/19330858/101283896-5c281c80-37ab-11eb-9f04-f05337873b00.jpeg" width="35%"></img> 
 # SMARS-ESP32-PS3
 SMARS bot with ESP32 using PS3 controller
 
@@ -29,7 +29,8 @@ I have included the code in a 'tabbed' format and files (.stl's) for the modifie
    - **Citations.ino** includes the license, useful links and recognition to those that contributed to this by sharing their wisdom and code.
 These five files need to be downloaded into a folder for the Arduino IDE to access.
    
-There is also a circuit and code for monitoring the charge state of the battery in the vehicle. There is a tap on the + side of the battery that goes to a voltage divider. The output of the voltage divider is read on GPIO32 an ADC pin. The charge state of the battery is displayed on the controller LEDS. 4 LEDS - full charge, 3 LEDS 75%, 2 LEDS 50%, and 1 LED- time to recharge. When the voltage goes below 7 volts for 15 seconds the controller will begin vibrating to remind the operator to recharge the battery. You can explore voltage dividers here - https://www.mischianti.org/2019/06/15/voltage-divider-calculator-and-application/ . The voltage divider can be omitted from your design. The function call is commented out in the main program loop. If you wish to use it you will need to uncomment it.
+- There is also a circuit and code for monitoring the charge state of the battery in the vehicle. There is a tap on the + side of the battery that goes to a voltage divider. The output of the voltage divider is read on GPIO32 an ADC pin. The charge state of the battery is displayed on the controller LEDS. 4 LEDS - full charge, 3 LEDS 75%, 2 LEDS 50%, and 1 LED- time to recharge. When the voltage goes below 7 volts for 15 seconds the controller will begin vibrating to remind the operator to recharge the battery. You can explore voltage dividers here - https://www.mischianti.org/2019/06/15/voltage-divider-calculator-and-application/ . The voltage divider can be omitted from your design. The function call is commented out in the main program loop. If you wish to use it you will need to uncomment it.
+- I use cheap knockoff PS3 controllers. I have not tried an authentic PS3 controller but hopefully they provide more accuracy than the knockoffs. One of my knockoffs does not zero out the joysticks in the 'neutral' position and the range is not balanced up - down and left - right. JVPernis provides sketches in his library that makes is easy to see the controller performance on the serial monitor.
 
 ### Circuit Diagram
 
@@ -37,6 +38,10 @@ There is also a circuit and code for monitoring the charge state of the battery 
 
 ### Wiring
 <img src="https://user-images.githubusercontent.com/19330858/101287278-4f142900-37bd-11eb-98c9-aa06b67d0906.jpeg" width="15%"></img> <img src="https://user-images.githubusercontent.com/19330858/101287284-54717380-37bd-11eb-911c-3e1199b6ab27.jpeg" width="15%"></img> <img src="https://user-images.githubusercontent.com/19330858/101287286-5a675480-37bd-11eb-9305-bae63bd2e4bf.jpeg" width="15%"></img> 
+
+ - I used 2.54mm pitch screw terminal blocks for making circuit board connections instead of soldering wires directly to the circuit boards. This makes it easy to fix wiring issues (mistakes!). It also makes it easy to reuse the boards in other applications.
+ - I offer suggestions for 2 different BEC's necessary to reduce the battery voltage from ~8V to 5 for the ESP32. The second one in the parts list is much smaller an preferable over the other. Any device that will reduce the battery voltage to 5 can be used.
+ - The L9110s motor controller was selected as it was cheap and easy to get. Any dual channel controller can be used. The L9110S comes with a 6 pin terminal block on one end. I have had mixed success removing the pins and soldering in 2.54 pitch screw terminals. I now solder the screw terminals to the pins instead. It's functional but not very neat.
 
 
    
