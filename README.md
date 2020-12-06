@@ -43,7 +43,9 @@ These five files need to be downloaded into a folder for the Arduino IDE to acce
  - I offer suggestions for 2 different BEC's necessary to reduce the battery voltage from ~8V to 5 for the ESP32. The second one in the parts list is much smaller an preferable over the other. Any device that will reduce the battery voltage to 5 can be used.
  - The L9110s motor controller was selected as it was cheap and easy to get. Any dual channel controller can be used. The L9110S comes with a 6 pin terminal block on one end. I have had mixed success removing the pins and soldering in 2.54 pitch screw terminals. I now solder the screw terminals to the pins instead. It's functional but not very neat.
 
-
+### Chassis
+- I have included .stl's for the modified (elongated) chassis, ESP32/L9110S mounting place and dome. 
+- The elongated chassis is based on a four motor design. With this I use the adjustable wheel modification found here - https://www.thingiverse.com/thing:3164589
    
 ### Final Thoughts
 I am grateful to Kevin McAleer for sharing the SMARS project with us. Thanks!
