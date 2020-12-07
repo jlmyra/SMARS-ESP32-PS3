@@ -11,7 +11,7 @@ I have included the code in a 'tabbed' format and files (.stl's) for the modifie
 - HiLetGo L9110S DC Motor Controller - https://tinyurl.com/y57pky5p ($1.50)
 - PS3 Controller - Amazon : https://tinyurl.com/y3ootahd ($19.90)
 - 2.54mm pitch Screw Terminal Blocks - https://tinyurl.com/yxtv7g5w (~$15 for 50)
-- 425K resistor
+- 91000K resistor
 - 680K resistor
 - 0.1uf capacitor
 - 5V, 3A BEC/UBEC (battery elimination circuit) - https://tinyurl.com/y3t4wqus (~$4.00) or https://tinyurl.com/y2z84n8p
