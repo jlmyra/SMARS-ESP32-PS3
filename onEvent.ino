@@ -25,14 +25,12 @@ void onEvent() {
        rightJoystickPos = (Ps3.data.analog.stick.rx); //uses right joystick x-position for steering left/right   
        leftRight = map(rightJoystickPos, -128, 128, -256, 256); //map joystick 2**8 resolution, use this for determining the steering motor speed
        
-            if(leftRight >= 3){
+            if(leftRight >= 2){
              motorSpeedADJ = map(leftRight, 0, 256, 256, 0);//Right turn, slow the right track
-             if(motorSpeedADJ < 10) {motorSpeedADJ = 0;}
               }
-            else if(leftRight <= -3){
+            else if(leftRight <= -2){
              leftRight = -leftRight;
              motorSpeedADJ = map(leftRight, 0, 256, 256, 0);//Left turn, slow the left track
-             if(motorSpeedADJ < 10) {motorSpeedADJ = 0;}
               }
                   
   //***STOP***

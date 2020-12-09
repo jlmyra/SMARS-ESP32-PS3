@@ -41,15 +41,19 @@ int leftRight = 0;
 //****************Battery Voltage Alarm******************************/
 int batStatusLED = 0; //Variable to hold rover battery status on controller
 
-float bitVoltage; //ADC converted voltage on batPin A0
+float bitVoltage = 0; //ADC converted voltage on batPin A0
+float bitVoltageSum = 0;
+float bitVoltageAvg = 0;
 
 float batteryVoltage; //computed battery voltage
 
 int batRemPercent;
+unsigned long analogReadCounter = 0;
 
 const int batPin =  32; //GPIO32 - ADC1_CH4 Variable that holds the GPIO Address 
 unsigned long previousMillis = 0; //for timer reading A0
-unsigned long interval = 1000; // millis between read A0
+unsigned long interval = 2; // millis between read A0
+
 
 int rumbleCounter = 0;
 
@@ -78,7 +82,8 @@ Serial.begin(250000);
 
 //Battery Meter Setup
   pinMode(batPin, INPUT);
-  analogSetPinAttenuation(batPin, ADC_0db);
+  analogSetWidth(10); //see https://esp32.com/viewtopic.php?f=12&t=1045
+  analogSetPinAttenuation(batPin, ADC_11db);
  
   pinMode(motorA1ApwmPin,OUTPUT); //Set  PIN to OUTPUT
   pinMode(motorA1BpwmPin,OUTPUT); //Set  PIN to OUTPUT
@@ -110,7 +115,7 @@ Serial.begin(250000);
   if(!Ps3.isConnected())
         return; 
            
-  //computeBatteryVoltage();
+  computeBatteryVoltage();
   
 }
 

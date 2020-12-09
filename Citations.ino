@@ -2,18 +2,17 @@
  
  Thanks to Jeffrey van Pernis for sharing the PS3 code. See-https://github.com/jvpernis/esp32-ps3
 
- Thanks to John K. Bennett for sharing the servo library for ESP32. See-https://github.com/jkb-git/ESP32Servo
- I had to make a modification to this library so that I could incorporate both servos and motors in my sketch.
- ESP32Servo.h - changed line 96 espservo.h to 2 servos max leaving channels 2-16 availble for motors
+ And thanks to these sites for sharing information on coding the ESP32 with PS3, PWM motors and Battery Monitor.
 
- And thanks to these sites for sharing information on coding the ESP32 with PS3, PWM motors and servos.
-https://dronebotworkshop.com/esp32-servo/
-
-https://techtutorialsx.com/2020/03/28/esp32-ps3-controller-controlling-a-dc-motor/
+ https://techtutorialsx.com/2020/03/28/esp32-ps3-controller-controlling-a-dc-motor/
  
-https://randomnerdtutorials.com/esp32-dc-motor-l298n-motor-driver-control-speed-direction/
+ https://randomnerdtutorials.com/esp32-dc-motor-l298n-motor-driver-control-speed-direction/
 
-https://randomnerdtutorials.com/esp32-pwm-arduino-ide/
+ https://randomnerdtutorials.com/esp32-pwm-arduino-ide/
+
+ https://randomnerdtutorials.com/esp32-adc-analog-read-arduino-ide/#:~:text=The%20ESP32%20DEVKIT%20V1%20DOIT,use%20the%20analogRead()%20function.
+
+ https://esp32.com/viewtopic.php?f=12&t=1045 (battery / ADC)
 
 and to:
 
