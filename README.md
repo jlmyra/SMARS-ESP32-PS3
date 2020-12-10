@@ -11,8 +11,8 @@ I have included the code in a 'tabbed' format and files (.stl's) for the modifie
 - HiLetGo L9110S DC Motor Controller - https://tinyurl.com/y57pky5p ($1.50)
 - PS3 Controller - Amazon : https://tinyurl.com/y3ootahd ($19.90)
 - 2.54mm pitch Screw Terminal Blocks - https://tinyurl.com/yxtv7g5w (~$15 for 50)
-- 91K resistor
-- 680K resistor
+- 30K resistor
+- 68K resistor
 - 0.1uf capacitor
 - 5V, 3A BEC/UBEC (battery elimination circuit) - https://tinyurl.com/y3t4wqus (~$4.00) or https://tinyurl.com/y2z84n8p
 - 2 Cell 18650 battery holder
@@ -46,6 +46,26 @@ These five files need to be downloaded into a folder for the Arduino IDE to acce
 ### Chassis
 - I have included .stl's for the modified (elongated) chassis, ESP32/L9110S mounting place and dome. 
 - The elongated chassis is based on a four motor design. With this I use the adjustable wheel modification found here - https://www.thingiverse.com/thing:3164589
-- The printed dome fits better if printed 'right-side-up' with supports. When printed upside down - the flat side on the print bed it will likely have a loose fit.   
+- The printed dome fits better if printed 'right-side-up' with supports. When printed upside down - the flat side on the print bed it will likely have a loose fit. 
+
+### ESP32 Battery Charge Monitor (see - https://randomnerdtutorials.com/esp32-adc-analog-read-arduino-ide/#:~:text=The%20ESP32%20DEVKIT%20V1%20DOIT,use%20the%20analogRead()%20function)
+Battery monitor circuits for ESP32 are a challenge since the ADC is nonlinear. Between 2.6V and 3.3V the ADC will give similar values. The same happens at the low end of the range as well. In monitoring a pair of 18650's A small voltage range is needed to determine the stae of the battery charge. LIPO's should be 
+recharged when they reach 80% of their full charge voltage or 80% of 8.4V = 6.7V. This narrow range makes it easy to use a linear portion of the ADC curve.
+The ESP32 ADC resolution is adjustable. It can be a value between 9 (0 – 511) and 12 bits (0 – 4095). Default is 12-bit resolution. I used 10 bit resolution 0-1024 as it was suggested that the response is less 'noisy' (see - https://esp32.com/viewtopic.php?f=12&t=1045)
+
+A voltage divider is necessary to reduce 8.4V battery voltage to something the ADC can use. Given the nonlinearity of the ADC I chode resistors to give ~2.5V 
+output at 8.4V (see - https://www.mischianti.org/2019/06/15/voltage-divider-calculator-and-application/)
+  // The max voltage this ESP32 ADC at the analogSetPinAttenuation 11db setting is 3.3V (see void setup()). 
+  // ADC is non-linear from about 2.6V to 3.3V. A voltage divider is needed to drop the battery voltage from 8.4
+  // (fully charged) to ~ 2.5V where the ADC becomes linear (but noisy). To smooth out the noise the sketch reads the 
+  // battery voltage every 2ms, 500 times and computes an average meaning every second a new voltage measurement is
+  // available.The voltage divider uses an R1 of 68k ohms and R2 of 29,500 ohms. 
+  // A 0.1uf capacitor is connected across Vout and ground.
+  // The ESP32 can communicate the status of the battery charge to the PS3 controller by using 
+  // the 4 connection leds. LED 4 is full charge, LED 3 is 3/4. LED 1 means it time to recharge the battery.
+  // Full charge is ~8.4V Should not use the battery below 6.4V (80% of 8.3V or 3.2V/cell*2 cells)
+  // Using 7V as the lower limit = 3220 bitVoltage or .850 V at A0
+
+### B
 ### Final Thoughts
 I am grateful to Kevin McAleer for sharing the SMARS project with us. Thanks!
