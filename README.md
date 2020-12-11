@@ -50,6 +50,7 @@ These five files need to be downloaded into a folder for the Arduino IDE to acce
 
 ### ESP32 Battery Charge Monitor
 (see - https://randomnerdtutorials.com/esp32-adc-analog-read-arduino-ide/#:~:text=The%20ESP32%20DEVKIT%20V1%20DOIT,use%20the%20analogRead()%20function)
+
 Battery monitor circuits for the ESP32 are a challenge since the ADC is nonlinear particularly at the ends of its range.. Between 2.6V and 3.3V the ADC will output similar values. The same happens at the low end of the range as well. In monitoring a pair of 18650's A small voltage range is needed to determine the stae of the battery charge. LIPO's should be recharged when they reach 80% of their full charge voltage or 80% of 8.4V = 6.7V. This narrow range makes it easy
 to use a linear portion of the ADC curve. The ESP32 ADC resolution is adjustable. It can be a value between 9 (0 – 511) and 12 bits (0 – 4095). Default is 
 12-bit resolution. I used 10 bit resolution 0-1024 as it was suggested that the response is less 'noisy' (see - https://esp32.com/viewtopic.php?f=12&t=1045)
