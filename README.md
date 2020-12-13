@@ -57,7 +57,7 @@ A voltage divider is necessary to reduce 8.4V battery voltage to something the A
 (see - https://www.mischianti.org/2019/06/15/voltage-divider-calculator-and-application/) 
 
 To smooth out the ADC reading the ADC is read every 2ms, 500 times with computing a new average every second. This may be overkill but it's what I chose to do.
-The ESP32 communicates the charge status of the battery by lighting the 'Player' "LEDs on the side panel of the PS3 controller. 4 LEDs = 75-100%, 3 LEDs = 50-74%, 2 LEDs = 25-49%, 1 LED < 24%. At 0% or ~6.7V the vibration motors are turned on in the PS3 controller alerting the operator to recharge the batteries.
+The ESP32 communicates the charge status of the battery by lighting the 'Player' LEDs on the side panel of the PS3 controller. 4 LEDs = 75-100%, 3 LEDs = 50-74%, 2 LEDs = 25-49%, 1 LED < 24%. At 0% or ~6.7V the vibration motors are turned on in the PS3 controller alerting the operator to recharge the batteries.
 
 ### Final Thoughts
 I am grateful to Kevin McAleer for sharing the SMARS project with us. Thanks!
