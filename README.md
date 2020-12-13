@@ -23,7 +23,7 @@ I have included the code in a 'tabbed' format and files (.stl's) for the modifie
 - Install PS3 Library in Arduino IDE https://github.com/jvpernis/esp32-ps3 (for help see: https://techtutorialsx.com/2020/02/16/esp32-connecting-a-ps3-controller/). Follow the instructions at either link for setting or determining the MAC address of your PS3 controller. 
 - Description: The sketch is presented in a 'tabbed' format for ease of editing. The files are:
    - **ESP32_SMARS_PS3-3-GOLD.ino** contains the variables, setup, and loop. Enter your PS3 MAC Address on Line 70 in void Setup().
-   - **Battery_Check.ino** is a function that samples the battery voltage and reports it on pin 32. It is commented out in the main Loop and does not need to be used.
+   - **Battery_Check.ino** is a function that samples the battery voltage on an ADC setup on GPIO32. It is commented out in the main Loop and does not need to be used.
    - **Connection.ino** is a function that looks for the bluetooth connection between the ESP32 and the PS3 controller.
    - **onEvent.ino** is a function that listens for changes occuring on the PS3 controller and converts them to motor actions for FORWARD, REVERSE, LEFT-RIGHT turns.
    - **Citations.ino** includes the license, useful links and recognition to those that contributed to this by sharing their wisdom and code.
