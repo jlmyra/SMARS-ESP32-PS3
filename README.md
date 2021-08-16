@@ -11,8 +11,8 @@ I have included the code in a 'tabbed' format and files (.stl's) for the modifie
 - HiLetGo L9110S DC Motor Controller - https://tinyurl.com/y57pky5p ($1.50)
 - PS3 Controller - Amazon : https://tinyurl.com/y3ootahd ($19.90)
 - 2.54mm pitch Screw Terminal Blocks - https://tinyurl.com/yxtv7g5w (~$15 for 50)
-- 30K resistor
-- 68K resistor
+- 42.3K resistors
+- 101.3K resistor
 - 0.1uf capacitor
 - 5V, 3A BEC/UBEC (battery elimination circuit) - https://tinyurl.com/y3t4wqus (~$4.00) or https://tinyurl.com/y2z84n8p
 - 2 Cell 18650 battery holder
@@ -51,9 +51,11 @@ These five files need to be downloaded into a folder for the Arduino IDE to acce
 
 Battery monitor circuits for the ESP32 are a challenge since the ADC is nonlinear particularly at the ends of its range. Between 2.6V and 3.3V the ADC will output similar values. The same happens at the low end of the range as well. In monitoring a pair of 18650's a small voltage range is needed to determine the state of the battery charge. LIPO's should be recharged when they reach 80% of their full charge voltage or 80% of 8.4V = 6.7V. This narrow range makes it easy
 to use a linear portion of the ADC curve. The ESP32 ADC resolution is adjustable. It can be a value between 9 (0 – 511) and 12 bits (0 – 4095). Default is 
-12-bit resolution. I used 10 bit resolution 0-1024 as it was suggested that the response is less 'noisy' (see - https://esp32.com/viewtopic.php?f=12&t=1045)
+12-bit resolution. 
 
-A voltage divider is necessary to reduce 8.4V battery voltage to something the ADC can use. Given the nonlinearity of the ADC I chose resistors R1-68K and R2-30K to give ~2.5V output at 8.4V. A 0.1uf capacitor is connected across Vout and ground to clean up the signal.  
+The sketch uses the pre-calibrated reference voltage in determining a corrected voltage on the ADC. see - https://deepbluembedded.com/esp32-adc-tutorial-read-analog-voltage-arduino/ for a full explanation.
+
+A voltage divider is necessary to reduce 8.4V battery voltage to something the ADC can use. Given the nonlinearity of the ADC I chose resistors R1-101.3K and R2-43.2K to give ~2.5V output at 8.4V. A 0.1uf capacitor is connected across Vout and ground to clean up the signal.  Enter the values of your resistors in line 40 and 41 of ESP32_SMARS_PS3-3-GOLD-With_BAT-2. Just insure that they yield ~2.5V with the voltage divider calculator.
 (see - https://www.mischianti.org/2019/06/15/voltage-divider-calculator-and-application/) 
 
 To smooth out the ADC reading the ADC is read every 2ms, 500 times with computing a new average every second. This may be overkill but it's what I chose to do.
