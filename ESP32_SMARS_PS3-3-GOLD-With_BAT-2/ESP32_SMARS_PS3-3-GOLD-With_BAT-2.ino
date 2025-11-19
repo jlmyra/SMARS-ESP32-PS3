@@ -9,28 +9,23 @@
 
 #include <Ps3Controller.h>
 #include "esp_adc_cal.h"
-
-//********************CONFIGURATION PARAMETERS***************************
-#define DEBUG_SERIAL true        // Set to false to disable debug printing for better performance
-#define JOYSTICK_DEADZONE 5      // Configurable deadzone (was hardcoded at 3)
-#define EVENT_TIMEOUT_MS 500     // Watchdog timeout - stops motors if no events for 500ms
-#define RAMP_RATE 0.15           // Motor acceleration rate (0.1 = slower, 0.3 = faster)
-#define STEERING_EXPO 2.0        // Steering exponential curve (1.0 = linear, 2.0 = squared, 3.0 = cubic)
-#define PWM_FREQUENCY 20000      // PWM Frequency - 20kHz to reduce motor whine (was 30kHz)
+#include "settings.h"  // User configuration file
 
 //********************MOTORS***************************
-uint32_t freq = PWM_FREQUENCY; //PWM Frequency
-uint8_t resolution = 8; //PWM - 8 bit resolution, 2^^8 or 0 - 255
+uint32_t freq = PWM_FREQUENCY; //PWM Frequency from settings.h
+uint8_t resolution = PWM_RESOLUTION; //PWM resolution from settings.h
 
-uint8_t motorA1AChannel = 0; //PWM Channel-A1A Front Motor +
-uint8_t motorA1BChannel = 1; //PWM Channel-A1B Front Motor -
-uint8_t motorB1AChannel = 2; //PWM Channel-B1A Rear Motor +
-uint8_t motorB1BChannel = 3; //PWM Channel-B1B Rear Motor -
+// PWM Channel assignments from settings.h
+uint8_t motorA1AChannel = MOTOR_LEFT_REV_CHANNEL;  // Left Motor Reverse
+uint8_t motorA1BChannel = MOTOR_LEFT_FWD_CHANNEL;  // Left Motor Forward
+uint8_t motorB1AChannel = MOTOR_RIGHT_REV_CHANNEL; // Right Motor Reverse
+uint8_t motorB1BChannel = MOTOR_RIGHT_FWD_CHANNEL; // Right Motor Forward
 
-int motorA1ApwmPin = 27; //GPIO27 A1A Front Motor +
-int motorA1BpwmPin = 25; //GPIO25 A1B Front Motor -
-int motorB1ApwmPin = 26; //GPIO26 B1A Rear Motor +
-int motorB1BpwmPin = 18; //GPIO18 B1B Rear Motor -
+// GPIO Pin assignments from settings.h
+int motorA1ApwmPin = MOTOR_LEFT_REV_PIN;   // Left Motor Reverse Pin
+int motorA1BpwmPin = MOTOR_LEFT_FWD_PIN;   // Left Motor Forward Pin
+int motorB1ApwmPin = MOTOR_RIGHT_REV_PIN;  // Right Motor Reverse Pin
+int motorB1BpwmPin = MOTOR_RIGHT_FWD_PIN;  // Right Motor Forward Pin
 
 // Motor speed variables
 int motorSpeed = 0;
@@ -56,15 +51,15 @@ unsigned long lastEventTime = 0;  // Watchdog timer for event timeout
 bool emergencyStop = false;       // Emergency stop flag
 bool tankTurnMode = false;        // Tank turn mode (pivot in place)
 
-// Speed limit modes: 0=50%, 1=75%, 2=100%
-int speedLimitMode = 2;           // Default to 100%
-float speedLimitFactors[3] = {0.5, 0.75, 1.0};
+// Speed limit modes from settings.h
+int speedLimitMode = DEFAULT_SPEED_LIMIT_MODE;
+float speedLimitFactors[3] = {SPEED_LIMIT_MODE_0, SPEED_LIMIT_MODE_1, SPEED_LIMIT_MODE_2};
 
 //***************Safety & Control Features*************
 
 //***************Telemetry & Diagnostics****************
 unsigned long lastTelemetryTime = 0;
-unsigned long telemetryInterval = 1000; // Report telemetry every 1 second
+unsigned long telemetryInterval = TELEMETRY_INTERVAL_MS; // From settings.h
 unsigned long loopCounter = 0;
 unsigned long lastLoopTime = 0;
 
@@ -72,22 +67,20 @@ unsigned long lastLoopTime = 0;
 
 //****************Battery Voltage Alarm******************************/
 int batStatusLED = 0; //Variable to hold rover battery status on controller
-int R1 = 101300; //Voltage divider R1
-int R2 = 42300; //Voltage Divider R2
-float vOutMax = 8.4 * R2 / (R1 + R2); // Calculate output of voltage divider with fully charged batteries
-float mSlope = 1 / (vOutMax / 8.4); //Calculate slope of voltage correction curve
+int R1 = BATTERY_R1; //Voltage divider R1 from settings.h
+int R2 = BATTERY_R2; //Voltage Divider R2 from settings.h
 
 float adcRead = 0;
-float batteryVoltage = 0; //computed battery voltage
+float batteryVoltage = 0; //voltage at ADC pin (after voltage divider)
 float batteryVoltageSum = 0;
-float batteryVoltageAvg = 0;
-float batteryVoltageCorr = 0;
+float batteryVoltageAvg = 0; //averaged voltage at ADC pin
+float batteryVoltageCorr = 0; //actual battery voltage (after divider calculation & correction)
 
 unsigned long analogReadCounter = 0;
 
-const int batPin =  32; //GPIO32 - ADC1_CH4 Variable that holds the GPIO Address
-unsigned long previousMillis = 0; //for timer reading A0
-unsigned long interval = 2; // millis between read A0
+const int batPin = BATTERY_ADC_PIN; //Battery ADC pin from settings.h
+unsigned long previousMillis = 0; //for timer reading battery ADC
+unsigned long interval = BATTERY_READ_INTERVAL_MS; // Battery read interval from settings.h
 
 int rumbleCounter = 0;
 
@@ -202,10 +195,10 @@ void printTelemetry() {
 //*****************************************************************************
 
 void setup() {
-  
-Serial.begin(250000); // Serial Port Speed
 
-  if (!Ps3.begin("b8:27:eb:37:85:b9")) { //MAC address of the PS3 Controller
+Serial.begin(SERIAL_BAUD_RATE); // Serial Port Speed from settings.h
+
+  if (!Ps3.begin(PS3_MAC_ADDRESS)) { //MAC address from settings.h
     Serial.println("Initialization failed.");
     return;
   }
