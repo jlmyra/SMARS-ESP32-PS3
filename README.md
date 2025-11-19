@@ -14,14 +14,29 @@ SMARS bot with ESP32 using PS3 controller
 - ✅ **Performance:** Optimized PWM frequency (20kHz), improved loop responsiveness
 
 ### Quick Start Guide:
-1. Upload the improved code to your ESP32
-2. Connect PS3 controller (see setup instructions below)
-3. **Controls:**
+1. **Configure:** Edit `settings.h` in the ESP32_SMARS_PS3-3-GOLD-With_BAT-2 folder
+   - Set your PS3 controller MAC address
+   - Adjust motor control parameters if needed (defaults work well)
+   - Configure battery voltage divider resistor values
+2. **Upload:** Upload the improved code to your ESP32
+3. **Connect:** Pair your PS3 controller (see setup instructions below)
+4. **Drive:**
    - Left Stick Y-axis: Forward/Reverse
    - Right Stick X-axis: Left/Right Turn
    - **L1 Button:** Cycle speed limit (start with 50% for testing!)
    - **R1 Button:** Toggle tank turn mode (pivot in place)
    - **PS Button:** Emergency stop
+
+### Configuration File (settings.h):
+All robot parameters are now in a separate `settings.h` file for easy customization:
+- Motor control tuning (acceleration, steering sensitivity)
+- Safety parameters (watchdog timeout, dead zones)
+- Speed limiting modes
+- Battery monitoring thresholds
+- Pin assignments
+- PS3 MAC address
+
+See `settings.example.h` for a template or [IMPROVEMENTS.md](IMPROVEMENTS.md) for detailed configuration guide.
 
 ---
 

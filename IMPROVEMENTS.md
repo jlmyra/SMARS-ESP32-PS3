@@ -153,24 +153,76 @@ This document details the comprehensive improvements made to the SMARS ESP32 PS3
 
 ---
 
-## 🔧 Configuration Parameters
+## 🔧 Configuration File (settings.h)
 
-All configurable parameters are now clearly defined at the top of the main file:
+All configurable parameters are now in a separate **`settings.h`** file for easy customization!
 
+### Key Advantages:
+- ✅ All settings in one place
+- ✅ Well-organized and documented
+- ✅ Easy to share configurations
+- ✅ Can use `settings.example.h` as a template
+- ✅ Professional code organization
+
+### Main Configuration Categories:
+
+**Debug & Diagnostics:**
 ```cpp
 #define DEBUG_SERIAL true        // Enable/disable debug output
+#define TELEMETRY_INTERVAL_MS 1000  // Telemetry reporting rate
+```
+
+**Controller Input:**
+```cpp
 #define JOYSTICK_DEADZONE 5      // Joystick deadzone threshold
+```
+
+**Safety:**
+```cpp
 #define EVENT_TIMEOUT_MS 500     // Watchdog timeout in milliseconds
-#define RAMP_RATE 0.15           // Motor acceleration rate (0.1-0.3)
+```
+
+**Motor Control Tuning:**
+```cpp
+#define RAMP_RATE 0.15           // Motor acceleration rate (0.05-1.0)
 #define STEERING_EXPO 2.0        // Steering curve exponent (1.0-3.0)
 #define PWM_FREQUENCY 20000      // PWM frequency in Hz
 ```
 
-**Tuning Recommendations:**
+**Speed Limiting:**
+```cpp
+#define DEFAULT_SPEED_LIMIT_MODE 2  // 0=50%, 1=75%, 2=100%
+#define SPEED_LIMIT_MODE_0 0.50     // Customize each mode
+#define SPEED_LIMIT_MODE_1 0.75
+#define SPEED_LIMIT_MODE_2 1.00
+```
+
+**Battery Monitoring:**
+```cpp
+#define BATTERY_R1 101300        // Voltage divider resistor values
+#define BATTERY_R2 42300
+#define BATTERY_FULL_VOLTAGE 8.4
+#define BATTERY_LOW_VOLTAGE 6.7
+```
+
+**Hardware Configuration:**
+```cpp
+#define PS3_MAC_ADDRESS "b8:27:eb:37:85:b9"  // Your controller MAC
+#define MOTOR_LEFT_FWD_PIN 27    // GPIO pin assignments
+// ... etc
+```
+
+### Tuning Recommendations:
 - **RAMP_RATE**: Increase for more responsive acceleration, decrease for smoother
 - **STEERING_EXPO**: Increase for more aggressive steering, decrease for more linear
 - **JOYSTICK_DEADZONE**: Increase if you have controller drift
 - **EVENT_TIMEOUT_MS**: Adjust based on your controller's update rate
+
+### Using settings.h:
+1. Copy `settings.example.h` to `settings.h` if needed
+2. Edit `settings.h` with your preferences
+3. Upload to ESP32
+4. Settings take effect immediately
 
 ---
 

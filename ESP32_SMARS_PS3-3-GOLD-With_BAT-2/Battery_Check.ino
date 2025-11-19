@@ -18,10 +18,10 @@
   void computeBatteryVoltage(){
     
   unsigned long currentMillis = millis(); //set the current time
-  if (currentMillis - previousMillis > interval) { //check to see if the interval has been met, interval = 2 millis
+  if (currentMillis - previousMillis > interval) { //check to see if the interval has been met
   previousMillis = currentMillis; //reset the time
 
-  if (analogReadCounter < 500){ //Read the ADC 500 times every 2 millis or 500 times a second
+  if (analogReadCounter < BATTERY_AVERAGE_SAMPLES){ //Read the ADC multiple times for averaging
     analogReadCounter = analogReadCounter + 1;
     adcRead = analogRead(batPin); //Read the battery voltage on the ADC and correct it on the next line
     batteryVoltage = readADC_Cal(adcRead); //ADC Calibrated read function - see below returns mV
@@ -30,13 +30,15 @@
     //Serial.print("batteryVoltageSum= "); Serial.println(batteryVoltage);
   }
 
-  if (analogReadCounter == 500){
+  if (analogReadCounter == BATTERY_AVERAGE_SAMPLES){
     //Serial.print("analogReadCounter= "); Serial.println(analogReadCounter);
-    batteryVoltageAvg = batteryVoltageSum / 500; //Compute the Average
+    batteryVoltageAvg = batteryVoltageSum / BATTERY_AVERAGE_SAMPLES; //Compute the Average
     batteryVoltageCorr = (batteryVoltageAvg + 0.07) * mSlope; //Correct the ADC reading to Actual Battery Voltage
-                                                     
-    Serial.print ("batteryVoltageAvg= "); Serial.print (batteryVoltageAvg); Serial.print("\t"); Serial.print("batteryVoltageCorr= "); 
-    Serial.print (batteryVoltageCorr); Serial.print("  RumbleCounter= "); Serial.println(rumbleCounter);
+
+    if (DEBUG_SERIAL) {
+      Serial.print ("batteryVoltageAvg= "); Serial.print (batteryVoltageAvg); Serial.print("\t"); Serial.print("batteryVoltageCorr= ");
+      Serial.print (batteryVoltageCorr); Serial.print("  RumbleCounter= "); Serial.println(rumbleCounter);
+    }
 
     batteryVoltageSum = 0;
     analogReadCounter = 0;
@@ -50,16 +52,16 @@
   else if(batteryVoltageCorr <= 7.8 && batteryVoltageCorr > 7.3 ) {
     Ps3.setPlayer(batStatusLED);
     batStatusLED = 9; // 3 LEDS
-    rumbleCounter = 0; 
+    rumbleCounter = 0;
     batteryVoltageCorr = 0;
   }
-  else if(batteryVoltageCorr <= 7.3 && batteryVoltageCorr > 6.7 ) {
+  else if(batteryVoltageCorr <= 7.3 && batteryVoltageCorr > BATTERY_LOW_VOLTAGE ) {
     Ps3.setPlayer(batStatusLED);
     batStatusLED = 7; // 2 LEDS
-    rumbleCounter = 0; 
+    rumbleCounter = 0;
     batteryVoltageCorr = 0;
   }
-    else if(batteryVoltageCorr < 6.7 ) {
+    else if(batteryVoltageCorr < BATTERY_LOW_VOLTAGE ) {
     Ps3.setPlayer(batStatusLED);
     batStatusLED = 4;
     batteryVoltageCorr = 0;
