@@ -85,6 +85,10 @@
 //=============================================================================
 // BATTERY MONITORING
 //=============================================================================
+// Enable/disable battery voltage monitoring
+// Set to false if you don't have the voltage divider circuit installed
+#define ENABLE_BATTERY_MONITORING false  // Set to true to enable battery monitoring
+
 // Battery voltage divider resistor values (in ohms)
 // Original settings from your commented-out defines:
 //   #define setR1 101300;
