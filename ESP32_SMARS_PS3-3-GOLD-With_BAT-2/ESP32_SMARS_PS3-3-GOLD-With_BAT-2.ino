@@ -213,9 +213,11 @@ Serial.begin(SERIAL_BAUD_RATE); // Serial Port Speed from settings.h
   Ps3.attach(onEvent);
   Ps3.attachOnConnect(onConnection);
 
-//Battery Meter Setup
-  pinMode(batPin, INPUT);
- 
+//Battery Meter Setup (only if enabled in settings.h)
+  #if ENABLE_BATTERY_MONITORING
+    pinMode(batPin, INPUT);
+  #endif
+
   pinMode(motorA1ApwmPin,OUTPUT); //Set  PIN to OUTPUT
   pinMode(motorA1BpwmPin,OUTPUT); //Set  PIN to OUTPUT
   pinMode(motorB1ApwmPin,OUTPUT); //Set  PIN to OUTPUT
@@ -276,8 +278,10 @@ void loop() {
   // Apply motor speed ramping for smooth acceleration/deceleration
   rampMotorSpeeds();
 
-  // Read and compute battery voltage
-  computeBatteryVoltage();
+  // Read and compute battery voltage (only if enabled in settings.h)
+  #if ENABLE_BATTERY_MONITORING
+    computeBatteryVoltage();
+  #endif
 
   // Print telemetry (rate-limited)
   printTelemetry();
