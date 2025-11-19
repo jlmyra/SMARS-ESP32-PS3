@@ -58,8 +58,8 @@
 //=============================================================================
 // MOTOR PIN ASSIGNMENTS (MH-ET ESP32 + L9110S Motor Driver)
 //=============================================================================
-#define MOTOR_LEFT_FWD_PIN   27  // GPIO27 - A1B - Left Motor Forward
-#define MOTOR_LEFT_REV_PIN   25  // GPIO25 - A1A - Left Motor Reverse
+#define MOTOR_LEFT_FWD_PIN   25  // GPIO25 - A1B - Left Motor Forward
+#define MOTOR_LEFT_REV_PIN   27  // GPIO27 - A1A - Left Motor Reverse
 #define MOTOR_RIGHT_FWD_PIN  18  // GPIO18 - B1B - Right Motor Forward
 #define MOTOR_RIGHT_REV_PIN  26  // GPIO26 - B1A - Right Motor Reverse
 
