@@ -1,6 +1,29 @@
-<img src="https://user-images.githubusercontent.com/19330858/101283882-461a5c00-37ab-11eb-8002-d988d48a8043.jpeg" width="35%"></img> <img src="https://user-images.githubusercontent.com/19330858/101283896-5c281c80-37ab-11eb-9f04-f05337873b00.jpeg" width="35%"></img> 
+<img src="https://user-images.githubusercontent.com/19330858/101283882-461a5c00-37ab-11eb-8002-d988d48a8043.jpeg" width="35%"></img> <img src="https://user-images.githubusercontent.com/19330858/101283896-5c281c80-37ab-11eb-9f04-f05337873b00.jpeg" width="35%"></img>
 # SMARS-ESP32-PS3
 SMARS bot with ESP32 using PS3 controller
+
+## 🆕 Latest Updates (2025-11-19)
+
+**Major code improvements added!** See [IMPROVEMENTS.md](IMPROVEMENTS.md) for full details.
+
+### New Features:
+- ✅ **Safety:** Fail-safe motor stop, watchdog timer, emergency stop button (PS button)
+- ✅ **Control:** Smooth motor acceleration, exponential steering curves, configurable dead zones
+- ✅ **Modes:** Speed limiting (50%/75%/100% via L1), Tank turn mode (R1)
+- ✅ **Quality:** Complete code refactor, conditional debug output, real-time telemetry
+- ✅ **Performance:** Optimized PWM frequency (20kHz), improved loop responsiveness
+
+### Quick Start Guide:
+1. Upload the improved code to your ESP32
+2. Connect PS3 controller (see setup instructions below)
+3. **Controls:**
+   - Left Stick Y-axis: Forward/Reverse
+   - Right Stick X-axis: Left/Right Turn
+   - **L1 Button:** Cycle speed limit (start with 50% for testing!)
+   - **R1 Button:** Toggle tank turn mode (pivot in place)
+   - **PS Button:** Emergency stop
+
+---
 
 This is an adaptation of Kevin McAleer's (https://www.smarsfan.com/) SMARS project. In this version I have lengthened the chassis by one track segment length so that 2 - 18650 batteries fit in the bottom of the chassis just above the motors. Instead of an Arduino microcontroller an MH-ET ESP32 microcontroller is used. I chose this one for its compact size as well as the built in bluetooth and wifi eliminating the need for additional hardware. The ESP32 - PS3 Controller communication is via bluetooth. Jeffrey van Pernis has created an excellent library for PS3 code (See-https://github.com/jvpernis/esp32-ps3). It is available on Github or through the Arduino IDE.
 If you are familiar with Arduino evolving to ESP32 should be fairly easy. The Arduino IDE works well with the ESP32 with a few modifications. I have posted links below for further information. The most challenging step in this was setting the PS3 controller MAC address. The biggest difference you will find in coding the ESP32 is that the digitalWrite() and analogWrite() functions are replaced by ledcWrite(). There are a few more items that need to be setup to get PWM working. There is a good resource for this here - https://randomnerdtutorials.com/esp32-pwm-arduino-ide/
