@@ -25,7 +25,7 @@
     analogReadCounter = analogReadCounter + 1;
     adcRead = analogRead(batPin); //Read the battery voltage on the ADC and correct it on the next line
     batteryVoltage = readADC_Cal(adcRead); //ADC Calibrated read function - see below returns mV
-    batteryVoltage = ((batteryVoltage) * .001) - 0.07; //convert mV to V & add 0.07 offset to agree with voltmeter
+    batteryVoltage = ((batteryVoltage) * .001) - BATTERY_VOLTAGE_CORRECTION; //convert mV to V & apply correction offset
     batteryVoltageSum = batteryVoltageSum + batteryVoltage; //Sum the voltage readings
     //Serial.print("batteryVoltageSum= "); Serial.println(batteryVoltage);
   }
@@ -33,7 +33,7 @@
   if (analogReadCounter == BATTERY_AVERAGE_SAMPLES){
     //Serial.print("analogReadCounter= "); Serial.println(analogReadCounter);
     batteryVoltageAvg = batteryVoltageSum / BATTERY_AVERAGE_SAMPLES; //Compute the Average
-    batteryVoltageCorr = (batteryVoltageAvg + 0.07) * mSlope; //Correct the ADC reading to Actual Battery Voltage
+    batteryVoltageCorr = (batteryVoltageAvg + BATTERY_VOLTAGE_CORRECTION) * mSlope; //Correct the ADC reading to Actual Battery Voltage
 
     if (DEBUG_SERIAL) {
       Serial.print ("batteryVoltageAvg= "); Serial.print (batteryVoltageAvg); Serial.print("\t"); Serial.print("batteryVoltageCorr= ");

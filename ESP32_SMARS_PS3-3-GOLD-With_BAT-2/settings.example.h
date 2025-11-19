@@ -86,8 +86,16 @@
 // BATTERY MONITORING
 //=============================================================================
 // Battery voltage divider resistor values (in ohms)
+// Original settings from your commented-out defines:
+//   #define setR1 101300;
+//   #define setR2 42300;
+//   #define set_voltageCorrection 0.07;
 #define BATTERY_R1 101300  // Resistor R1 (high side)
 #define BATTERY_R2 42300   // Resistor R2 (low side)
+
+// Voltage correction offset to match voltmeter readings
+// Used in: batteryVoltage = ((batteryVoltage) * .001) - BATTERY_VOLTAGE_CORRECTION
+#define BATTERY_VOLTAGE_CORRECTION 0.07  // Offset in volts
 
 // Battery voltage thresholds (2S LiPo, 2x 18650)
 #define BATTERY_FULL_VOLTAGE 8.4   // Fully charged voltage
