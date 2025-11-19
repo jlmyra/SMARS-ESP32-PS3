@@ -100,19 +100,19 @@ void onEvent() {
         turnPower = applySteeringCurve(turnPower);
         int turnSpeed = (int)(turnPower * 256 * speedLimitFactors[speedLimitMode]);
 
-        if (rightJoystickPos > 0) {
-          // Turn right: left forward, right reverse
+        if (rightJoystickPos < 0) {
+          // Turn right: left forward, right reverse (inverted stick direction)
           targetSpeedLeft = turnSpeed;
           targetSpeedRight = -turnSpeed;
         } else {
-          // Turn left: left reverse, right forward
+          // Turn left: left reverse, right forward (inverted stick direction)
           targetSpeedLeft = -turnSpeed;
           targetSpeedRight = turnSpeed;
         }
 
         if (DEBUG_SERIAL) {
           Serial.print("TANK TURN - ");
-          Serial.print(rightJoystickPos > 0 ? "RIGHT" : "LEFT");
+          Serial.print(rightJoystickPos < 0 ? "RIGHT" : "LEFT");  // Inverted
           Serial.print(" - Speed: ");
           Serial.println(turnSpeed);
         }
@@ -137,7 +137,7 @@ void onEvent() {
     }
 
     if (abs(rightJoystickPos) > JOYSTICK_DEADZONE) {
-      steering = rightJoystickPos;
+      steering = -rightJoystickPos;  // Negate to fix inverted steering
     }
 
     // If both sticks are in deadzone, stop
