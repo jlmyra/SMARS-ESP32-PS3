@@ -69,14 +69,12 @@ unsigned long lastLoopTime = 0;
 int batStatusLED = 0; //Variable to hold rover battery status on controller
 int R1 = BATTERY_R1; //Voltage divider R1 from settings.h
 int R2 = BATTERY_R2; //Voltage Divider R2 from settings.h
-float vOutMax = BATTERY_FULL_VOLTAGE * R2 / (R1 + R2); // Calculate output of voltage divider
-float mSlope = 1 / (vOutMax / BATTERY_FULL_VOLTAGE); //Calculate slope of voltage correction curve
 
 float adcRead = 0;
-float batteryVoltage = 0; //computed battery voltage
+float batteryVoltage = 0; //voltage at ADC pin (after voltage divider)
 float batteryVoltageSum = 0;
-float batteryVoltageAvg = 0;
-float batteryVoltageCorr = 0;
+float batteryVoltageAvg = 0; //averaged voltage at ADC pin
+float batteryVoltageCorr = 0; //actual battery voltage (after divider calculation & correction)
 
 unsigned long analogReadCounter = 0;
 

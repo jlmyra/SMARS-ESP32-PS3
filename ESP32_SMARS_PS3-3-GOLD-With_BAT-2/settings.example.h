@@ -94,8 +94,12 @@
 #define BATTERY_R2 42300   // Resistor R2 (low side)
 
 // Voltage correction offset to match voltmeter readings
-// Used in: batteryVoltage = ((batteryVoltage) * .001) - BATTERY_VOLTAGE_CORRECTION
-#define BATTERY_VOLTAGE_CORRECTION 0.07  // Offset in volts
+// This value is ADDED to the calculated voltage: batteryVoltage = calculated + BATTERY_VOLTAGE_CORRECTION
+// - Use POSITIVE values if readings are too LOW (most common)
+// - Use NEGATIVE values if readings are too HIGH
+// - Use 0.0 if readings match multimeter
+// - Adjust in small increments (0.1V) until serial output matches your multimeter
+#define BATTERY_VOLTAGE_CORRECTION 0.0  // Start at 0.0, then calibrate (was 0.07)
 
 // Battery voltage thresholds (2S LiPo, 2x 18650)
 #define BATTERY_FULL_VOLTAGE 8.4   // Fully charged voltage
