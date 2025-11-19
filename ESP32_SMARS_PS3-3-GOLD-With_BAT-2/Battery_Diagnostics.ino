@@ -47,15 +47,16 @@ void printBatteryDiagnostics() {
     Serial.println(correctedVoltage2, 3);
 
     // Voltage divider calculations
-    Serial.print("\nVoltage Divider Ratio: ");
+    Serial.print("\nVoltage Divider Ratio (R2/(R1+R2)): ");
     Serial.println((float)R2 / (R1 + R2), 6);
 
-    Serial.print("Expected ADC voltage at 8.4V battery: ");
-    Serial.print(vOutMax, 4);
-    Serial.println(" V");
+    Serial.print("Voltage Multiplier ((R1+R2)/R2): ");
+    Serial.println((float)(R1 + R2) / R2, 6);
 
-    Serial.print("mSlope multiplier: ");
-    Serial.println(mSlope, 6);
+    Serial.print("Expected ADC voltage at 8.4V battery: ");
+    float expectedVout = BATTERY_FULL_VOLTAGE * R2 / (R1 + R2);
+    Serial.print(expectedVout, 4);
+    Serial.println(" V");
 
     // Current averaged reading
     if (analogReadCounter > 0) {
